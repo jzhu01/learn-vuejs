@@ -50,21 +50,11 @@ export default {
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
     addFriend(friendName, friendEmail, friendPhoneNumber){
-      console.log(friendName);
-      let id = friendName.toLowerCase();
-      if (id.indexOf(' ') >= 0){
-        id = id.substring(0, id.indexOf(' '));
-      }
-      const newFriend = {id:id, name:friendName, phone: friendPhoneNumber, email:friendEmail, isFavorite: false};
+      const newFriend = {id:new Date().toISOString(), name:friendName, phone: friendPhoneNumber, email:friendEmail, isFavorite: false};
       this.friends.push(newFriend);
     },
-    removeFriendFromList(friend) {
-      let friendIdx = this.friends.indexOf(friend);
-      if (this.friends.length > 1) {
-        this.friends = this.friends.splice(friendIdx, 1);
-      } else {
-        this.friends = [];
-      }
+    removeFriendFromList(friendId) {
+      this.friends = this.friends.filter(friend => friend.id !== friendId);
     }
   }
 };
@@ -96,7 +86,8 @@ header {
   padding: 0;
   list-style: none;
 }
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -104,6 +95,19 @@ header {
   text-align: center;
   width: 90%;
   max-width: 40rem;
+}
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
 }
 #app h2 {
   font-size: 2rem;

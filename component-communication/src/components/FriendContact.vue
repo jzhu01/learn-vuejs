@@ -52,7 +52,7 @@ export default {
     removeFriend(){
       let confirmRemoval = confirm("Are you sure you want to remove friend?");
       if (confirmRemoval) {
-        this.$emit("remove-friend", {id: this.id, name: this.name, phone: this.phoneNumber, email: this.emailAddress, isFavorite: this.isFavorite});
+        this.$emit("remove-friend", this.id);
       }
     }
   }

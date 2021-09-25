@@ -1,16 +1,21 @@
 <template>
-  <form>
+  <form @submit.prevent="submitNewFriend">
     <h3>Add a Friend</h3>
-    <label>New Friend's Name: </label>
-    <input type="text" ref="friendName">
-    <br>
-    <label>New Friend's Phone Number: </label>
-    <input type="text" ref="friendPhoneNumber">
-    <br>
-    <label>New Friend's Email: </label>
-    <input type="text" ref="friendEmail">
-    <br>
-    <button @click.prevent="submitNewFriend">Submit</button>
+    <div>
+      <label>New Friend's Name: </label>
+      <input type="text" v-model="friendName">
+    </div>
+    <div>
+      <label>New Friend's Phone Number: </label>
+      <input type="text" v-model="friendPhoneNumber">
+    </div>
+    <div>
+      <label>New Friend's Email: </label>
+      <input type="text" v-model="friendEmail">
+    </div>
+    <div>
+      <button>Add Contact</button>
+    </div>
   </form>
 </template>
 
@@ -18,7 +23,9 @@
 export default {
   data() {
     return {
-      isFavorite: false
+      friendName: "",
+      friendPhoneNumber: "",
+      friendEmail: "",
     }
   },
   emits: {
@@ -33,16 +40,11 @@ export default {
   },
   methods: {
     submitNewFriend() {
-      this.$emit("new-friend-data", this.$refs.friendName.value, this.$refs.friendEmail.value, this.$refs.friendPhoneNumber.value);
+      this.$emit("new-friend-data", this.friendName, this.friendEmail, this.friendPhoneNumber);
     }
   }
 }
 </script>
 
 <style scoped>
-form {
-  margin: 0;
-  box-sizing: border-box;
-  text-align: center;
-}
 </style>
